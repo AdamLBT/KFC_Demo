@@ -8,6 +8,7 @@ import ProductForm from './pages/ProductForm'
 import Category from './pages/Category'
 import User from './pages/User'
 import ProductDetails from './pages/ProductDetails'
+import Memo from './pages/Memo'
 
 
 function App() {
@@ -21,13 +22,16 @@ function App() {
         </div>
         <ul>
           <li>
+            <Link to="/category">分类管理</Link>
+          </li>
+          <li>
             <Link to="/product">菜单管理</Link>
           </li>
           <li>
             <Link to="/user">用户管理</Link>
           </li>
           <li>
-            <Link to="/category">分类管理</Link>
+            <Link to="/memo">备忘录</Link>
           </li>
         </ul>
       </div>
@@ -41,6 +45,7 @@ function App() {
           <Route path="/category" component={Category}/>
           <Route path="/user" component={User}/>
           <Route path="/productDetails" component={ProductDetails}/>
+          <Route path="/memo" component={Memo}/>
         </Switch>
       </div>
       </BrowserRouter>

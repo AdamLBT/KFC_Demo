@@ -11,7 +11,11 @@ import {
 import ProductForm from './ProductForm'
 import $ from 'jquery'
 //ajax的全局配置
-
+$.ajaxSetup({
+  error:function(error){
+    message.error('服务器异常');
+  }
+})
 
 class Product extends React.Component {
   constructor(props){
@@ -69,7 +73,7 @@ class Product extends React.Component {
       cancelText: 'No',
       onOk:() => {
         console.log('OK');
-        let url = "";
+        let url = "http://127.0.0.1:8888/product/batchDelete";
         $.ajax({
           url,
           method:'POST',
@@ -80,7 +84,6 @@ class Product extends React.Component {
             this.loadProduct();
           }
         })
-        alert(JSON.stringify(this.state.ids));
       },
       onCancel() {
         console.log('Cancel');
@@ -90,7 +93,6 @@ class Product extends React.Component {
 
   delete(record){
     console.log(record);
-    alert(record.id);
     let url = "http://127.0.0.1:8888/product/deleteById?id="+record.id;
     $.get(url,(result)=>{
       if(result.status === 200){
@@ -153,6 +155,11 @@ class Product extends React.Component {
         width:"200px"
       },
       {
+        title: '类别',
+        dataIndex: 'category_id',
+        width:"200px"
+      },
+      {
         title: '状态',
         dataIndex: 'status',
         width:"200px"
@@ -181,9 +188,7 @@ class Product extends React.Component {
               <Icon type='eye' onClick={this.toDeails.bind(this,record)}/>
             </div>
           )
-        }
-        
-        
+        } 
       },
     ];
     // rowSelection object indicates the need for row selection
